@@ -594,4 +594,21 @@ public class QuerydslBasicTest {
                 .set(member.age, member.age.add(1))
                 .execute();
     }
+
+    @Test
+    public void sqlFunction(){
+        jpaQueryFactory
+                .select(Expressions.stringTemplate("function('replace', {0}, {1}, {2})", member.username, "member", "M"))
+                .from(member)
+                .fetchFirst();
+    }
+
+    @Test
+    public void sqlFunction2(){
+        jpaQueryFactory
+                .select(member.username)
+                .from(member)
+                .where(member.username.eq(Expressions.stringTemplate("function('lower', {0})",
+                        member.username)));
+    }
 }
