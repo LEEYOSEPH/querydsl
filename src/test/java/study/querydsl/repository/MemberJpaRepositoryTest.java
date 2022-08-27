@@ -79,4 +79,6 @@ class MemberJpaRepositoryTest {
                 memberJpaRepository.searchByBuilder(condition);
         assertThat(result).extracting("username").containsExactly("member4");
     }
+
+
 }
