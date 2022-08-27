@@ -576,4 +576,22 @@ public class QuerydslBasicTest {
     private BooleanExpression ageEq(Integer ageCond) {
         return ageCond != null ? member.age.eq(ageCond) : null;
     }
+
+    @Test
+    public void bulkUpdate(){
+        long count = jpaQueryFactory
+                .update(member)
+                .set(member.username, "비회원")
+                .where(member.age.lt(28))
+                .execute();
+
+    }
+
+    @Test
+    public void bulkUpdatePlus(){
+        long count = jpaQueryFactory
+                .update(member)
+                .set(member.age, member.age.add(1))
+                .execute();
+    }
 }
